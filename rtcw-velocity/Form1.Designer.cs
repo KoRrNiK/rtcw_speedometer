@@ -45,7 +45,7 @@ namespace rtcw_velocity
             this.velocity_value.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.velocity_value.Font = new System.Drawing.Font("Montserrat Medium", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.velocity_value.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.velocity_value.Location = new System.Drawing.Point(1, 47);
+            this.velocity_value.Location = new System.Drawing.Point(2, 45);
             this.velocity_value.Name = "velocity_value";
             this.velocity_value.Size = new System.Drawing.Size(221, 66);
             this.velocity_value.TabIndex = 0;
