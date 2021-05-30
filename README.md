@@ -1,5 +1,5 @@
 # RtCW Speedometer
-### Release Version: [**_@Click_**](https://github.com/KoRrNiK/rtcw_fov-changer/releases)
+### Release Version: [**_@Click_**](https://github.com/KoRrNiK/rtcw_speedometer/releases/)
 
 > The Speedometer shows you how fast you are moving ( velocity )\
 > The ability to change the font. \
