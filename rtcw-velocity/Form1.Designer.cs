@@ -58,6 +58,7 @@ namespace rtcw_velocity
             this.button1 = new System.Windows.Forms.Button();
             this.velocity_value = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.panel7 = new System.Windows.Forms.Panel();
             this.maxspeedlabel = new System.Windows.Forms.Label();
             this.recordspeedlabel = new System.Windows.Forms.Label();
             this.timer3 = new System.Windows.Forms.Timer(this.components);
@@ -72,6 +73,7 @@ namespace rtcw_velocity
             ((System.ComponentModel.ISupportInitialize)(this.backgroundColor)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.panel7.SuspendLayout();
             this.SuspendLayout();
             // 
             // timer1
@@ -367,37 +369,43 @@ namespace rtcw_velocity
             // 
             // velocity_value
             // 
-            this.velocity_value.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.velocity_value.AutoSize = true;
             this.velocity_value.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.velocity_value.Font = new System.Drawing.Font("Montserrat Medium", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.velocity_value.Font = new System.Drawing.Font("Montserrat Medium", 34F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.velocity_value.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.velocity_value.Location = new System.Drawing.Point(0, 122);
+            this.velocity_value.Location = new System.Drawing.Point(4, 14);
             this.velocity_value.Name = "velocity_value";
-            this.velocity_value.Size = new System.Drawing.Size(221, 66);
+            this.velocity_value.Size = new System.Drawing.Size(214, 63);
             this.velocity_value.TabIndex = 0;
             this.velocity_value.Text = "velocity";
             // 
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.Lime;
-            this.panel2.Controls.Add(this.maxspeedlabel);
-            this.panel2.Controls.Add(this.recordspeedlabel);
-            this.panel2.Controls.Add(this.velocity_value);
+            this.panel2.Controls.Add(this.panel7);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(150, 33);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(238, 209);
             this.panel2.TabIndex = 11;
             // 
+            // panel7
+            // 
+            this.panel7.Controls.Add(this.velocity_value);
+            this.panel7.Controls.Add(this.maxspeedlabel);
+            this.panel7.Controls.Add(this.recordspeedlabel);
+            this.panel7.Location = new System.Drawing.Point(6, 95);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(228, 110);
+            this.panel7.TabIndex = 3;
+            // 
             // maxspeedlabel
             // 
-            this.maxspeedlabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.maxspeedlabel.AutoSize = true;
             this.maxspeedlabel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.maxspeedlabel.Font = new System.Drawing.Font("Montserrat Medium", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.maxspeedlabel.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.maxspeedlabel.Location = new System.Drawing.Point(88, 176);
+            this.maxspeedlabel.Location = new System.Drawing.Point(95, 79);
             this.maxspeedlabel.Name = "maxspeedlabel";
             this.maxspeedlabel.Size = new System.Drawing.Size(78, 16);
             this.maxspeedlabel.TabIndex = 2;
@@ -405,12 +413,11 @@ namespace rtcw_velocity
             // 
             // recordspeedlabel
             // 
-            this.recordspeedlabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.recordspeedlabel.AutoSize = true;
             this.recordspeedlabel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.recordspeedlabel.Font = new System.Drawing.Font("Montserrat Medium", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.recordspeedlabel.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.recordspeedlabel.Location = new System.Drawing.Point(6, 176);
+            this.recordspeedlabel.Location = new System.Drawing.Point(13, 79);
             this.recordspeedlabel.Name = "recordspeedlabel";
             this.recordspeedlabel.Size = new System.Drawing.Size(85, 16);
             this.recordspeedlabel.TabIndex = 1;
@@ -465,7 +472,8 @@ namespace rtcw_velocity
             ((System.ComponentModel.ISupportInitialize)(this.backgroundColor)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
+            this.panel7.ResumeLayout(false);
+            this.panel7.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -506,6 +514,7 @@ namespace rtcw_velocity
         private System.Windows.Forms.Label maxspeedlabel;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Panel panel7;
     }
 }
 
