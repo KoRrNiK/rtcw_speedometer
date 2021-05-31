@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Memory;
 
+using System.Runtime.InteropServices;
+
 namespace rtcw_velocity
 {
     public partial class Form1 : Form
@@ -21,9 +23,22 @@ namespace rtcw_velocity
             InitializeComponent();
         }
 
+        /*private static readonly IntPtr HWND_TOPMOST = new IntPtr(-1);
+        private const UInt32 SWP_NOSIZE = 0x0001;
+        private const UInt32 SWP_NOMOVE = 0x0002;
+        private const UInt32 TOPMOST_FLAGS = SWP_NOMOVE | SWP_NOSIZE;
+
+        [DllImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        public static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int X, int Y, int cx, int cy, uint uFlags);
+        */
+
+        string nameGame = "WolfSP";
+
         bool processOpen = false;
         bool isShow = false;
         bool isShowRecord = true;
+        bool checkLoad = false;
 
         int pID = 0;
 
@@ -33,14 +48,40 @@ namespace rtcw_velocity
 
         float userMaxSpeed = 0;
 
+        private void timer9_Tick(object sender, EventArgs e)
+        {
+            if (processOpen && !checkLoad) 
+            { 
+
+                if (m.ReadByte(nameGame + ".exe+A4021C") == 0)
+                {
+                    m.CloseProcess();
+                }
+            }
+        }
+
         private void timer1_Tick(object sender, EventArgs e)
         {
-            processOpen = processOpen = m.OpenProcess("WolfSP");
-            pID = m.GetProcIdFromName("WolfSP");
+            processOpen = processOpen = m.OpenProcess(nameGame);
+            pID = m.GetProcIdFromName(nameGame);
 
             if (processOpen)
             {
+
+                processOpenLabel.ForeColor = Color.Green;
+                processOpenLabel.Text = "Game Found";
+
+                processID.ForeColor = Color.Green;
+                processID.Text = pID.ToString();
+
                 float value = m.ReadFloat("cgamex86.dll+FAFBC");
+
+                if (value > 0 && !checkLoad)
+                {
+                    timer9.Stop();
+                    checkLoad = true;
+                }
+
                 int newvalue = (int)value;
 
                 userMaxSpeed = Math.Max(userMaxSpeed, value);
@@ -60,25 +101,25 @@ namespace rtcw_velocity
                     recordspeedlabel.Text = "";
                 }
 
-
-                processOpenLabel.ForeColor = Color.Green;
-                processOpenLabel.Text = "Game Found";
-
-                processID.ForeColor = Color.Green;
-                processID.Text = pID.ToString();
-
                 Properties.Settings.Default.maxspeed = userMaxSpeed;
                 Properties.Settings.Default.Save();
 
-
-
             }
             else
-            {
-                velocity_value.Text = "N/A";
+            { 
 
+                if (checkLoad)
+                {
+                    timer9.Start();
+                    checkLoad = false;
+                }
+
+                velocity_value.Text = "N/A";
                 processOpenLabel.ForeColor = Color.DarkRed;
+                processID.ForeColor = Color.DarkRed;
                 processOpenLabel.Text = "N/A";
+                processID.Text = "N/A";
+                maxspeedlabel.Text = "N/A";
             }
 
 
@@ -88,7 +129,11 @@ namespace rtcw_velocity
         private void Form1_Load(object sender, EventArgs e)
         {
 
-            timer3.Start();
+            //SetWindowPos(this.Handle, HWND_TOPMOST, 0, 0, 0, 0, TOPMOST_FLAGS);
+
+            timer1.Start(); // speed 
+            timer3.Start(); // rgb tittle
+            timer9.Start(); // check load 
 
             settingsPanel.Hide();
 
@@ -127,7 +172,6 @@ namespace rtcw_velocity
             velocity_value.Text = "N/A";
 
 
-            timer1.Start();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -164,7 +208,6 @@ namespace rtcw_velocity
             {
                 isShow = false;
                 timer2.Start();
-
             }
             else
             {
@@ -187,15 +230,12 @@ namespace rtcw_velocity
                 recordspeedlabel.Font = maxspeedlabel.Font;
                 recordspeedlabel.Font = new Font(recordspeedlabel.Font.Name, 9, recordspeedlabel.Font.Style);
 
-
                 var cvt = new FontConverter();
                 string s = cvt.ConvertToString(velocity_value.Font);
                 Font f = cvt.ConvertFromString(s) as Font;
 
                 fontNameLabel.Text = s;
                 Properties.Settings.Default.Font = velocity_value.Font;
-
-
 
                 Properties.Settings.Default.Save();
             }
@@ -265,7 +305,6 @@ namespace rtcw_velocity
             
         }
 
-
         // COLORS TITTLE
 
         private void timer3_Tick(object sender, EventArgs e)
@@ -334,6 +373,8 @@ namespace rtcw_velocity
             }
         }
 
+        /* ------------- */
+
         private void button4_Click(object sender, EventArgs e)
         {
            
@@ -349,6 +390,11 @@ namespace rtcw_velocity
         private void button3_Click(object sender, EventArgs e)
         {
             userMaxSpeed = 0;
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            Application.Restart();
         }
 
         private void up_bar_button1_Click(object sender, EventArgs e)
